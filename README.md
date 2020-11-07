@@ -1,4 +1,4 @@
-# Spider
+# Spider - unofficial Amazon GraphQL API
 
 ![spider](logo.png)
 

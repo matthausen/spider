@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+from models import Product
  
 def get_title(soup):
      
@@ -69,15 +70,26 @@ def get_availability(soup):
  
     return available  
 
+def make_item(name, price, rating, reviews, availability, link):
+  item = Product()
+  item.name=name
+  item.price=price
+  item.rating=rating
+  item.reviews=reviews
+  item.availability=availability
+  item.link=link
 
-def scrape():
+  return item
+
+
+def scrape(product_name):
     # Headers for request
     HEADERS = ({'User-Agent':
                 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
                 'Accept-Language': 'en-US'})
  
     # The webpage URL
-    URL = "https://www.amazon.com/s?k=" + "playstation" + "+4&ref=nb_sb_noss_2"
+    URL = "https://www.amazon.com/s?k=" + product_name + "+4&ref=nb_sb_noss_2"
      
     # HTTP Request
     webpage = requests.get(URL, headers=HEADERS)
@@ -94,23 +106,40 @@ def scrape():
     # Loop for extracting links from Tag Objects
     for link in links:
         links_list.append(link.get('href'))
+
+    items_list = []
  
  
     # Loop for extracting product details from each link 
-    for link in links_list:
- 
-        new_webpage = requests.get("https://www.amazon.com" + link, headers=HEADERS)
- 
-        new_soup = BeautifulSoup(new_webpage.content, "lxml")
-         
-        # Function calls to display all necessary product information
-        print("Product Title =", get_title(new_soup))
-        print("Product Price =", get_price(new_soup))
-        print("Product Rating =", get_rating(new_soup))
-        print("Number of Product Reviews =", get_review_count(new_soup))
-        print("Availability =", get_availability(new_soup))
-        print("Link = ", link)
-        print()  
+    for index, link in enumerate(links_list):
+
+        if index <= 19:
+
+          new_webpage = requests.get("https://www.amazon.com" + link, headers=HEADERS)
+  
+          new_soup = BeautifulSoup(new_webpage.content, "lxml")
+
+          item = make_item(
+            get_title(new_soup),
+            get_rating(new_soup),
+            get_rating(new_soup),
+            get_review_count(new_soup),
+            get_availability(new_soup),
+            link
+            )
+
+          items_list.append(item)
+          
+          # Function calls to display all necessary product information
+          ''' print("Product Title =", get_title(new_soup))
+          print("Product Price =", get_price(new_soup))
+          print("Product Rating =", get_rating(new_soup))
+          print("Number of Product Reviews =", get_review_count(new_soup))
+          print("Availability =", get_availability(new_soup))
+          print("Link = ", link)
+          print()  ''' 
+
+        return items_list
  
  
 if __name__ == '__main__':
