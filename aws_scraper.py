@@ -110,5 +110,5 @@ if __name__ == '__main__':
         print("Product Rating =", get_rating(new_soup))
         print("Number of Product Reviews =", get_review_count(new_soup))
         print("Availability =", get_availability(new_soup))
-        print()
+        print("Link = ", link)
         print()

@@ -1,27 +1,25 @@
 from collections import namedtuple
 from graphene import ObjectType, String, Schema, Field
 
-ProductValueObject = namedtuple("Product", ["item_name", "item_price"])
+ProductValueObject = namedtuple("Product", ["name", "price", "rating", "reviews", "availability", "link"])
 
 class Product(ObjectType):
-  item_name=String()
-  item_price=String()
+  name=String()
+  price=String()
+  rating=String()
+  reviews=String()
+  availability=String()
+  link=String()
+
 
 
 class Query(ObjectType):
-  hello = String(item=String(default_value="stranger"))
-  goodbye = String()
+  item=Field(Product, name=String(required=True))
 
-  item=Field(Product)
+  def resolve_item(parent, info, name):
+    # Call the scraper here
+    return ProductValueObject(name=name, price="$300", rating="", reviews="", availability="", link="")
 
-  def resolve_item(parent, info):
-    return ProductValueObject(item_name="Xbox360", item_price="$300")
-
-  def resolve_hello(root, info, item):
-    return f'Hello {item}!'
-
-  def resolve_goodbye(root, info):
-    return 'See ya'
 
 schema = Schema(query=Query)
 
