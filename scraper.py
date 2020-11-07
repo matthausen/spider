@@ -67,11 +67,10 @@ def get_availability(soup):
     except AttributeError:
         available = "Not Available"
  
-    return available    
- 
- 
-if __name__ == '__main__':
- 
+    return available  
+
+
+def scrape():
     # Headers for request
     HEADERS = ({'User-Agent':
                 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
@@ -111,4 +110,8 @@ if __name__ == '__main__':
         print("Number of Product Reviews =", get_review_count(new_soup))
         print("Availability =", get_availability(new_soup))
         print("Link = ", link)
-        print()
+        print()  
+ 
+ 
+if __name__ == '__main__':
+ scrape()

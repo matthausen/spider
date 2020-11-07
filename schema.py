@@ -1,5 +1,6 @@
 from collections import namedtuple
 from graphene import ObjectType, String, Schema, Field
+from scraper import scrape
 
 ProductValueObject = namedtuple("Product", ["name", "price", "rating", "reviews", "availability", "link"])
 
@@ -18,6 +19,7 @@ class Query(ObjectType):
 
   def resolve_item(parent, info, name):
     # Call the scraper here
+    scrape()
     return ProductValueObject(name=name, price="$300", rating="", reviews="", availability="", link="")
 
 
