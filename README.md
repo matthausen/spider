@@ -1,6 +1,6 @@
 # Spider
 
-![spider](logo.pgn)
+![spider](./logo.pgn)
 
 Spider is an unofficial Amazon GraphQL API which allows the user to browse the Amazon catalogue.
 
