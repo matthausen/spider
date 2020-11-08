@@ -130,7 +130,6 @@ def scrape(product_name):
 
           items_list.append(item)
           
-          # Function calls to display all necessary product information
           ''' print("Product Title =", get_title(new_soup))
           print("Product Price =", get_price(new_soup))
           print("Product Rating =", get_rating(new_soup))
@@ -139,7 +138,7 @@ def scrape(product_name):
           print("Link = ", link)
           print()  ''' 
 
-        return items_list
+    return items_list
  
  
 if __name__ == '__main__':
