@@ -6,7 +6,7 @@ Spider is an unofficial Amazon GraphQL API which allows the user to browse the A
 
 It use scraping to fetch information from the official website and serve its content over an API.
 
-It currently scrapes Amazon only but could fetch more information from other retailers in the near future.
+![graphQL](gql_screenshot.png)
 
 
 ## Table of contents
